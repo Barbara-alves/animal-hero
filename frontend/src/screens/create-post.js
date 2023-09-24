@@ -1,43 +1,73 @@
 import React, { useState } from 'react';
-import DrawerNavigation from '../utils/DrawerNavigation';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Constants from '../utils/Constants';
 import LogoAnimalHero from './../assets/animal-hero.jpg';
 import './../styles/classes.css';
 import './../styles/tags.css';
 
 function CreatePost() {
+    const { state } = useLocation();
+    const navigate = useNavigate();
+
     const [local, setLocal] = useState('');
     const [especie, setEspecie] = useState('');
     const [descricao, setDescricao] = useState('');
     const [sexo, setSexo] = useState('');
     const [foto, setFoto] = useState(null);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+
         const animalPerdido = {
-            Local: local,
+            local: local,
             especie: especie,
             descricao: descricao,
             sexo: sexo,
             foto: foto
         };
-        console.log(animalPerdido);
-        setLocal('');
-        setEspecie('');
-        setDescricao('');
-        setSexo('');
-        setFoto(null);
+
+        const response = await fetch(Constants.POST_URL, {
+            method: 'POST',
+            headers: {
+                "Content-Type": 'application/json',
+                Authorization: `Bearer ${state.jwt}`,
+            },
+            body: JSON.stringify(animalPerdido)
+        });
+
+        if (response.ok) {
+            setLocal('');
+            setEspecie('');
+            setDescricao('');
+            setSexo('');
+            setFoto(null);
+            navigate('/posts', { replace: true, state })
+        } else {
+            alert("Falha ao salvar o animal perdido! " + (await response.json()).message || "Erro desconhecido");
+        }
+
     };
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        setFoto(file);
+
+        if (file) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                setFoto(reader.result);
+            }
+        }
     };
 
     return (
         <>
             {/* <DrawerNavigation /> */}
             <header>
-                <img src={LogoAnimalHero} className='logo-animal' alt='Logo Animal Hero'></  img>
+
+                <Link to="/posts" state={state} >
+                    <img src={LogoAnimalHero} className='logo-animal' alt='Logo Animal Hero' />
+                </Link>
             </header>
 
             <div className='div-form'>
@@ -69,8 +99,8 @@ function CreatePost() {
                                     type="radio"
                                     id="sexo-macho"
                                     name="sexo"
-                                    value="Macho"
-                                    checked={sexo === 'Macho'}
+                                    value="M"
+                                    checked={sexo === 'M'}
                                     onChange={(event) => setSexo(event.target.value)}
                                 />
                                 Macho
@@ -82,11 +112,24 @@ function CreatePost() {
                                     type="radio"
                                     id="sexo-femea"
                                     name="sexo"
-                                    value="Fêmea"
-                                    checked={sexo === 'Fêmea'}
+                                    value="F"
+                                    checked={sexo === 'F'}
                                     onChange={(event) => setSexo(event.target.value)}
                                 />
                                 Fêmea
+                            </label>
+                        </div>
+                        <div>
+                            <label htmlFor="sexo-desconhecido">
+                                <input
+                                    type="radio"
+                                    id="sexo-desconhecido"
+                                    name="sexo"
+                                    value="D"
+                                    checked={sexo === 'D'}
+                                    onChange={(event) => setSexo(event.target.value)}
+                                />
+                                Desconhecido
                             </label>
                         </div>
                     </div>
