@@ -1,10 +1,10 @@
 # animal-hero
 Projeto de extensão.
 
-#front-end
+# front-end
 React
 
-#Back-end
+# Back-end
 NodeJS
 
 Para rodar o projeto⤵️
