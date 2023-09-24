@@ -61,8 +61,8 @@ function ReadPosts() {
         <ul>
           {posts?.map((post, index) => (
             <li key={index}>
-              <h3>{post.Local}</h3>
-              <h4>Publicado por: {post.user.name}</h4>
+              <h5>Publicado por: {post.user.name}</h5>
+              <h3>🗺️ {post.local}</h3>
               <p>Espécie: {post.especie}</p>
               <p>Sexo: {SEXO[post.sexo]}</p>
               <p>Descrição: {post.descricao}</p>
