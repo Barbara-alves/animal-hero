@@ -154,6 +154,7 @@ function CreatePost() {
                     <button type="submit">Cadastrar</button>
                 </form>
             </div>
+            <footer></footer>
         </>
     );
 }

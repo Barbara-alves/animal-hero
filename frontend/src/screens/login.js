@@ -45,6 +45,7 @@ const LoginPage = () => {
           ux_mode='redirect'
         />
       </div>
+      <footer></footer>
     </>
   );
 };

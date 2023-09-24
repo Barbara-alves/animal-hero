@@ -34,7 +34,7 @@ function EditPost() {
 
     for (const [key, value] of Object.entries(post)) {
       const el = event.target.querySelector(`#${key},[name=${key}]`);
-      if (el && el.value != "" && value !== el.value) {
+      if (el && el.value !== "" && value !== el.value) {
         updatedPost[key] = el.value;
         hasChanges = true;
       }
@@ -161,6 +161,7 @@ function EditPost() {
         </div>
         <button type="submit">Salvar Edições</button>
       </form>
+      <footer></footer>
 
     </>
   );

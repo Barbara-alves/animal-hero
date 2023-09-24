@@ -27,11 +27,22 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background: #008b9062;
+    padding: 20px;
+    border-radius: 5px;
+}
+.edit{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
     padding: 20px;
     border-radius: 5px;
 }
 
  .label{
     display: flex;
+ }
+
+ .animal-image{
+    width: 200px;
+    height: auto;
  }
