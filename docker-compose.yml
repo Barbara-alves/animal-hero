@@ -10,10 +10,10 @@ services:
       - SESSION_SECRET=${SESSION_SECRET}
     restart: unless-stopped
     ports:
-      - 8000:3000
+      - ${BACKEND_PORT}:3000
   frontend:
     build: ./frontend
     ports:
-      - 8001:3000
+      - ${FRONTEND_PORT}:3000
     restart: unless-stopped
     
