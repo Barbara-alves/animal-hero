@@ -7,7 +7,7 @@ COPY . .
 RUN cd frontend
 RUN npm i --force
 
-COPY build/ /app/backend/public/
+COPY ./build/ /app/backend/public/
 
 RUN cd backend
 
