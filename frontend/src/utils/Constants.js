@@ -1,5 +1,5 @@
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'https://animalhero.maikemota.com.br';
 
 module.exports = {
     GOOGLE_CLIENT_ID: '539473549977-hc40uqpc90em1smaqrk7l1nkde1ebaj2.apps.googleusercontent.com',
