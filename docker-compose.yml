@@ -1,7 +1,7 @@
 version: "3"
 services:
-  backend:
-    build: ./backend
+  animal-hero:
+    build: .
     environment:
       - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
       - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
@@ -11,9 +11,4 @@ services:
     restart: unless-stopped
     ports:
       - ${BACKEND_PORT}:3000
-  frontend:
-    build: ./frontend
-    ports:
-      - ${FRONTEND_PORT}:3000
-    restart: unless-stopped
     
