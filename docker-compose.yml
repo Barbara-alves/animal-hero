@@ -1,0 +1,14 @@
+version: "3"
+services:
+  backend:
+    build: ./backend
+    environment:
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - JWT_SECRET=${JWT_SECRET}
+      - FRONTEND_URL=https://animahero.maikemota.com.br/
+    restart: unless-stopped
+  frontend:
+    build: ./frontend
+    restart: unless-stopped
+    
