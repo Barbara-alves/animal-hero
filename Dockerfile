@@ -4,15 +4,12 @@ WORKDIR /app
 
 COPY . .
 
-RUN cd /app/frontend
+WORKDIR /app/frontend
 RUN npm i --force
+RUN ls -la .
+RUN cp -r /app/frontend/build/ /app/backend/public
 
-RUN cp -r /app/frontend/build/ /app/backend/public/
-
-RUN cd /app/backend
-
+WORKDIR /app/backend
 FROM builder
-
-WORKDIR /app/
 
 CMD ["npm", "start"]
